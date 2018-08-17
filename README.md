@@ -1,3 +1,3 @@
 # Risc16
 
-fpgastudent Risc16 projerct for TinyFPGA Bx
+fpgastudent Risc16 project for TinyFPGA BX

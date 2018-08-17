@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
-// fpga4student.com 
-// FPGA projects, VHDL projects, Verilog projects 
-// Verilog code for RISC Processor 
+// fpga4student.com
+// FPGA projects, VHDL projects, Verilog projects
+// Verilog code for RISC Processor
 // Verilog code for Data Path of the processor
 module Datapath_Unit(
  input clk,
@@ -23,10 +23,10 @@ module Datapath_Unit(
  wire [15:0] ALU_out;
  wire zero_flag;
  wire [15:0] PC_j, PC_beq, PC_2beq,PC_2bne,PC_bne;
- wire beq_control;
+ wire beq_control, bne_control;
  wire [12:0] jump_shift;
  wire [15:0] mem_read_data;
- // PC 
+ // PC
  initial begin
   pc_current <= 16'd0;
  end
@@ -58,12 +58,12 @@ module Datapath_Unit(
   .reg_read_data_2(reg_read_data_2)
  );
  // immediate extend
- assign ext_im = {{10{instr[5]}},instr[5:0]};  
+ assign ext_im = {{10{instr[5]}},instr[5:0]};
  // ALU control unit
  alu_control ALU_Control_unit(.ALUOp(alu_op),.Opcode(instr[15:12]),.ALU_Cnt(ALU_Control));
  // multiplexer alu_src
  assign read_data2 = (alu_src==1'b1) ? ext_im : reg_read_data_2;
- // ALU 
+ // ALU
  ALU alu_unit(.a(reg_read_data_1),.b(read_data2),.alu_control(ALU_Control),.result(ALU_out),.zero(zero_flag));
  // PC beq add
  assign PC_beq = pc2 + {ext_im[14:0],1'b0};
@@ -90,7 +90,7 @@ module Datapath_Unit(
     .mem_read(mem_read),
     .mem_read_data(mem_read_data)
    );
- 
+
  // write back
  assign reg_write_data = (mem_to_reg == 1'b1)?  mem_read_data: ALU_out;
  // output to control unit

@@ -1,11 +1,15 @@
 `timescale 1ns / 1ps
-// fpga4student.com 
-// FPGA projects, VHDL projects, Verilog projects 
-// Verilog code for RISC Processor 
+// fpga4student.com
+// FPGA projects, VHDL projects, Verilog projects
+// Verilog code for RISC Processor
 
 module Risc_16_bit(
- input clk
+ input clk,
+ output usb_pu
 );
+
+ assign usb_pu = 0;
+
  wire jump,bne,beq,mem_read,mem_write,alu_src,reg_dst,mem_to_reg,reg_write;
  wire[1:0] alu_op;
  wire [3:0] opcode;
